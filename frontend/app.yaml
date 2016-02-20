@@ -1,0 +1,11 @@
+module: frontend
+api_version: 1
+runtime: python27
+threadsafe: yes
+
+handlers:
+- url: /
+  static_files: # JEFF insert static index.html here
+  upload: # what you want to hit first static/index.html
+- url: /
+  static_dir: static
