@@ -5,7 +5,19 @@ threadsafe: yes
 
 handlers:
 - url: /
-  static_files: # JEFF insert static index.html here
-  upload: # what you want to hit first static/index.html
-- url: /
-  static_dir: static
+  static_files: assets/templates/searchMap.html
+  upload: assets/templates/searchMap.html
+
+- url: /assets
+  static_dir: assets
+
+
+
+  # - url: /icons
+  #   static_dir: assets/icons
+
+  # - url: /images
+  #   static_dir: /assets/images
+
+  # - url: /js/*
+  #   static_dir: assets/js 
