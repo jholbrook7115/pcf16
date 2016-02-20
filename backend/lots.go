@@ -48,14 +48,3 @@ func lots(w http.ResponseWriter, r *http.Request) {
 		io.WriteString(w, fmt.Sprintf("<div>%v, %v<br>%+v</div>", results.Businesses[i].Name, results.Businesses[i].Rating, results.Businesses[i]))
 	}
 }
-
-func getOptions(w http.ResponseWriter) (options *yelp.AuthOptions, err error) {
-	var o *yelp.AuthOptions
-	o = &yelp.AuthOptions{
-		ConsumerKey:       `kZbXKIrGcKxZUkngoRvuPw`,
-		ConsumerSecret:    `2dPVLt9IplBScfVUGWOxU9D9CKk`,
-		AccessToken:       `_gjRApdUuszrb6S4EQDDgd67atiHqEUd`,
-		AccessTokenSecret: `LAn2GvSJp-hPp-ChobOAU6JV_Tc`,
-	}
-	return o, nil
-}
