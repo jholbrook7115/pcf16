@@ -16,22 +16,76 @@
 		<md-content layout="column" layout-fill style="background-color: transparent">
 			<md-toolbar>
 				<div class="md-toolbar-tools">
-					<span><h2>Landing Lot</h2></span>
+					<span><h2>LandingLot</h2></span>
 					<span flex></span>
+					<md-button class="md-icon-button">
+						<md-icon md-svg-src="assets/icons/ic_my_location_black_24px.svg" aria-label="My Location" ng-click="search(true)"></md-icon>
+					</md-button>
 					<div style="padding-top: 1%;">
 						<md-input-container>
 							<label>Search</label>
 							<input ng-model="searchText">
 						</md-input-container>
+						<md-button ng-click="search(false)">Search</md-button>
 					</div>
 					<md-button class="md-icon-button">
-						<md-icon md-svg-src="assets/icons/ic_menu_black_24px.svg" aria-label="Menu"></md-icon>
+						<md-icon md-svg-src="assets/icons/ic_menu_black_24px.svg" aria-label="Menu" ng-click="openRightSidenav()"></md-icon>
 					</md-button>
 				</div>
 			</md-toolbar>
-			
-				<md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="right-sidenav" flex>
-					
+				<!-- AGGREGATED API DATA LIST FORMAT -->
+				<md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="right-sidenav">
+					<md-list>
+						<md-subheader class="md-no-sticky">Parking Locations Near {{searchText}}</md-subheader> 
+						<div ng-repeat="item in listResults">
+							<md-list-item class="md-3-line">
+								<div class="md-list-item-text">
+									<div layout="row" layout-align="center center">
+										<!-- <div ng-repeat="image in item.images">
+											<img ng-src="{{image.imagePathSmall}}" class="md-avatar" />
+										</div> -->
+										<div layout="column">
+											<span>{{item.title}}</span>
+											<span>{{item.displayAddress}}</span>
+										</div>
+										<span flex></span>
+										<div layout="column" layout-align="center center" >
+											<b>${{item.price}}.00</b>
+										</div>
+									</div>
+									<!-- <md-button>{{item.displayName}}</md-button> -->
+								</div>
+								<md-divider ></md-divider>
+							</md-list-item>
+						</div>
+					</md-list>
+
+				<!-- PARKING PANDA API LIST FORMAT -->
+					<!-- <md-list>
+						<md-subheader class="md-no-sticky">Parking Locations Near {{searchText}}</md-subheader> 
+						<div ng-repeat="items in listResults">
+							<md-list-item class="md-3-line" ng-repeat="item in items.locations">
+								<div class="md-list-item-text">
+									<div layout="row" layout-align="center center">
+										<div ng-repeat="image in item.images">
+											<img ng-src="{{image.imagePathSmall}}" class="md-avatar" />
+										</div>
+										<div layout="column">
+											<span>{{item.displayName}}</span>
+											<span>{{item.displayAddress}}</span>
+										</div>
+										<span flex></span>
+										<div layout="column" layout-align="center center" >
+											<b>${{item.price}}.00</b>
+										</div>
+									</div>
+									
+								</div>
+								<md-divider ></md-divider>
+							</md-list-item>
+						</div>
+					</md-list> -->
+				<!-- END PP API LIST -->
 				</md-sidenav>
 				<div id="map" flex></div>
 		</md-content>
