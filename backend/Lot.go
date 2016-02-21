@@ -41,6 +41,20 @@ func GetLotsFromParkingPanda(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func ServeLots(w http.ResponseWriter, r *http.Request) {
+	c := appengine.NewContext(r)
+	q := datastore.NewQuery("Lot")
+	var lots []Lot
+	if _, err := q.GetAll(c, &lots); err != nil {
+		fmt.Errorf("Encoding: %v", err)
+	}
+	enc := json.NewEncoder(w)
+	err := enc.Encode(lots)
+	if err != nil {
+		fmt.Errorf("Encoding: %v", err)
+	}
+}
+
 func SaveAllFromParkingPanda(w http.ResponseWriter, r *http.Request) {
 	c := appengine.NewContext(r)
 	lots, err := fetchParkingPandaLots(c)

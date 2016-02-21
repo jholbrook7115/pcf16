@@ -1,9 +1,8 @@
-module: default
+application: pcf-2016
+version: 1
 runtime: go
 api_version: go1
 
 handlers:
-- url: /_ah/spi/.*
+- url: /.*
   script: _go_app
-  secure: always
-
