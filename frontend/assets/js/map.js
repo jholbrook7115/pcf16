@@ -57,6 +57,21 @@ app.controller("MapCtrl", function($scope, $mdSidenav, $log, $mdSidenav, $http, 
 		}
 	}	
 	$scope.searchText = "";
+
+	$scope.predicate = "closest";
+	$scope.reverse = false;
+
+
+	$scope.order = function(predicate, shouldReverse){
+            $scope.predicate = predicate;
+            if(shouldReverse !== 'false'){
+                $scope.reverse = true;
+            } else {
+                $scope.reverse = false;
+            }
+    };
+
+    
 	// $scope.geoLocationAvailable = navigator.geolocation;
 	// if($scope.geoLocationAvailable){
 	// 	$log.debug('Geolocation is available');
