@@ -34,6 +34,7 @@ func GetLotsFromParkingPanda(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		fmt.Errorf("fetchParkingPandaLots: %v", err)
 	}
+	w.Header().Set("Access-Control-Allow-Origin", "*")
 	enc := json.NewEncoder(w)
 	err = enc.Encode(lots)
 	if err != nil {
@@ -48,6 +49,7 @@ func ServeLots(w http.ResponseWriter, r *http.Request) {
 	if _, err := q.GetAll(c, &lots); err != nil {
 		fmt.Errorf("Encoding: %v", err)
 	}
+	w.Header().Set("Access-Control-Allow-Origin", "*")
 	enc := json.NewEncoder(w)
 	err := enc.Encode(lots)
 	if err != nil {
