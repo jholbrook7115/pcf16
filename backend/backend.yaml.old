@@ -1,0 +1,10 @@
+application: pcf-2016 
+module: default
+version: step2
+runtime: go
+api_version: go1
+
+handlers:
+- url: /api/*
+  script: _go_app
+
