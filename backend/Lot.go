@@ -23,6 +23,8 @@ type Lot struct {
 	Lng            float64 `json:"lng"`
 	Key            string
 	DisplayAddress string `json:"display_address"`
+	Descr          string `json:"description"`
+	Direc          string `json:"directions"`
 	//	BookingURL string  `json:"booking_url"`
 }
 
