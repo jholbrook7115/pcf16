@@ -21,13 +21,13 @@
 					<md-button class="md-icon-button">
 						<md-icon md-svg-src="assets/icons/ic_my_location_black_24px.svg" aria-label="My Location" ng-click="search(true)"></md-icon>
 					</md-button>
-					<div style="padding-top: 1%;">
+					<div style="padding-top: 2%;">
 						<md-input-container>
 							<label>Search</label>
 							<input ng-model="searchText">
 						</md-input-container>
-						<md-button ng-click="search(false)">Search</md-button>
 					</div>
+					<md-button ng-click="search(false)">Search</md-button>
 					<md-button class="md-icon-button">
 						<md-icon md-svg-src="assets/icons/ic_menu_black_24px.svg" aria-label="Menu" ng-click="openRightSidenav()"></md-icon>
 					</md-button>
@@ -35,27 +35,56 @@
 			</md-toolbar>
 				<!-- AGGREGATED API DATA LIST FORMAT -->
 				<md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="right-sidenav">
-					<md-list>
+					<md-menu>
+						<md-button ng-click="$mdOpenMenu($event)" class="md-icon-button" aria-label="Open Sort List Menu">
+							<md-icon md-svg-src="assets/icons/ic_sort_black_24px.svg"></md-icon>
+						</md-button>
+						<md-menu-content>
+							<md-menu-item><md-button ng-click="order('closest', 'false')">Closest Parking</md-button></md-menu-item>
+							<md-menu-item><md-button ng-click="order('price', 'false')">Price</md-button></md-menu-item>
+						</md-menu-content>
+					</md-menu>
+					<md-list layout-wrap>
 						<md-subheader class="md-no-sticky">Parking Locations Near {{searchText}}</md-subheader> 
-						<div ng-repeat="item in listResults">
-							<md-list-item class="md-3-line">
-								<div class="md-list-item-text">
-									<div layout="row" layout-align="center center">
-										<!-- <div ng-repeat="image in item.images">
-											<img ng-src="{{image.imagePathSmall}}" class="md-avatar" />
-										</div> -->
-										<div layout="column">
-											<span>{{item.title}}</span>
-											<span>{{item.displayAddress}}</span>
-										</div>
+						<div ng-repeat="item in listResults | orderBy: predicate : reverse" >
+							<md-list-item flex="100">
+								<!-- <div class="md-list-item-text"> -->
+								<md-card flex="100">
+									<md-card-title layout-wrap flex="100">
+									<div layout="column" layout-wrap flex="100">
+										<div layout="row" layout-wrap flex="100">
+										<md-card-title-media>
+											<div class="md-media-sm card-media">
+												<img ng-src="{{item.image_url}}" layout-padding/>
+											</div>
+										</md-card-title-media>
 										<span flex></span>
-										<div layout="column" layout-align="center center" >
-											<b>${{item.price}}.00</b>
+										<span class="md-headline" layout-align="center center">Price:  ${{item.price}}</span>
 										</div>
+										<md-card-title-text ><md-button ng-click="selectMarker({{item.title}})"><span class="md-title" >{{item.title}}</span></md-button></md-card-title-text>
+										</div>
+									</md-card-title>
+									<md-card-content><span>{{item.description}}</span></md-card-content>
+									<div layout="row">
+									<md-card-footer>Source: {{item.source}} </md-card-footer>
+										<md-card-actions>
+											<md-button class="md-icon-button">
+												<md-icon md-svg-src="assets/icons/ic_view_list_black_24px.svg" aria-label="List All" ng-click="expandList()"></md-icon>
+											</md-button>
+										</md-card-actions>
 									</div>
+									
+
+								</md-card>
+									
+									
+											<!-- <span>{{item.title}}</span>
+											<span>{{item.displayAddress}}</span> -->
+									
+								
 									<!-- <md-button>{{item.displayName}}</md-button> -->
-								</div>
-								<md-divider ></md-divider>
+								<!-- </div> -->
+								<!-- <md-divider ></md-divider> -->
 							</md-list-item>
 						</div>
 					</md-list>
