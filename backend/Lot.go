@@ -1,8 +1,8 @@
 package backend
 
 import (
+	"encoding/json"
 	"fmt"
-	"io"
 	"net/http"
 
 	"appengine"
@@ -26,10 +26,16 @@ func GetLotsFromParkingPanda(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		fmt.Errorf("fetchParkingPandaLots: %v", err)
 	}
-	io.WriteString(w, "<div>-----------------------------</div>")
+	/*io.WriteString(w, "<div>-----------------------------</div>")
 	for i := 0; i < len(lots); i++ {
 		io.WriteString(w,
 			fmt.Sprintf("<center><div><img src='%v'>%v from %v, has price %v</div></center>",
 				lots[i].ImageURL, lots[i].Title, lots[i].Source, lots[i].Price))
+	}*/
+
+	enc := json.NewEncoder(w)
+	err = enc.Encode(lots)
+	if err != nil {
+		fmt.Errorf("Encoding: %v", err)
 	}
 }
