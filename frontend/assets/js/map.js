@@ -17,8 +17,8 @@ app.controller("MapCtrl", function($scope, $mdSidenav, $log, $mdSidenav, $http, 
 
 	$window.map;
 	$window.initMap = function initMap() {
-		var map;
-	    map = new google.maps.Map(document.getElementById('map'), {
+		// var map;
+	    $scope.map = new google.maps.Map(document.getElementById('map'), {
 
 	        center: {lat: 40.7127, lng: 74.0059},
 	        zoom: 8
@@ -30,15 +30,15 @@ app.controller("MapCtrl", function($scope, $mdSidenav, $log, $mdSidenav, $http, 
 	    if(navigator.geolocation){
 	    	navigator.geolocation.getCurrentPosition(function(position){
 					initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-					map.setCenter(initialLocation);
+					$scope.map.setCenter(initialLocation);
 
-					geocoder.geocode({'location': map.getCenter()}, function(results, status){
+					geocoder.geocode({'location': $scope.map.getCenter()}, function(results, status){
 						if(status === google.maps.GeocoderStatus.OK){
 							if (results[1]){
-								map.setZoom(11);
+								$scope.map.setZoom(11);
 								var marker = new google.maps.Marker({
-									position: map.getCenter(),
-									map: map
+									position: $scope.map.getCenter(),
+									map: $scope.map
 								});
 
 								$log.debug(results[1].formatted_address);
@@ -94,6 +94,7 @@ app.controller("MapCtrl", function($scope, $mdSidenav, $log, $mdSidenav, $http, 
 		} else {
 			url = PP_url.concat($scope.searchText);
 		}
+		//url = "https://localhost:8082/api/lots";
 		url = "https://pcf-2016.appspot.com/api/lots";
 		$log.debug(url);
 		$http({
@@ -107,14 +108,15 @@ app.controller("MapCtrl", function($scope, $mdSidenav, $log, $mdSidenav, $http, 
 			$scope.openRightSidenav();
 
 			//add markers to the map
-			// for(var i = 0; i < response.data.length; i++){
-			// 	var location = response.data[i];
-			// 	var marker = new google.maps.Marker({
-			// 		position: {lat: location.Lat, lng: location.Lng},
-			// 		map: map,
-			// 		title: location.title
-			// 	});
-			// }
+
+			for(var i = 0; i < response.data.length; i++){
+				var location = response.data[i];
+				var marker = new google.maps.Marker({
+					position: {lat: location.lat, lng: location.lng},
+					map: $scope.map
+					
+				});
+			}
 
 		}, function(response){
 			$log.debug(response.data || "Request Failed");
