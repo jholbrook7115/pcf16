@@ -46,7 +46,8 @@
 					</md-menu>
 					<md-list layout-wrap>
 						<md-subheader class="md-no-sticky">Parking Locations Near {{searchText}}</md-subheader> 
-						<div ng-repeat="item in listResults | orderBy: predicate : reverse" >
+						<div ng-repeat="items in listResults" >
+							<div ng-repeat="item in items.parking_list| orderBy: predicate : reverse">
 							<md-list-item flex="100">
 								<!-- <div class="md-list-item-text"> -->
 								<md-card flex="100">
@@ -55,18 +56,20 @@
 										<div layout="row" layout-wrap flex="100">
 										<md-card-title-media>
 											<div class="md-media-sm card-media">
-												<img ng-src="{{item.image_url}}" layout-padding/>
+											
+												<img ng-class='{in: $first}' ng-src="{{item.image_url}}" layout-padding/>
+											
 											</div>
 										</md-card-title-media>
 										<span flex></span>
-										<span class="md-headline" layout-align="center center">Price:  ${{item.price}}</span>
+										<span ng-class='{in: $first}' class="md-headline" layout-align="center center">Price:  ${{item.price}}</span>
 										</div>
-										<md-card-title-text ><md-button ng-click="selectMarker({{item.title}})"><span class="md-title" >{{item.title}}</span></md-button></md-card-title-text>
+										<md-card-title-text ><md-button><span ng-class='{in: $first}' class="md-title" >{{items.location_name}}</span></md-button></md-card-title-text>
 										</div>
 									</md-card-title>
-									<md-card-content><span>{{item.description}}</span></md-card-content>
+									<md-card-content><span ng-class='{in: $first}'>{{item.description}}</span></md-card-content>
 									<div layout="row">
-									<md-card-footer>Source: {{item.source}} </md-card-footer>
+									<md-card-footer ng-class='{in: $first}'>Source: {{item.source}} </md-card-footer>
 										<md-card-actions>
 											<md-button class="md-icon-button">
 												<md-icon md-svg-src="assets/icons/ic_view_list_black_24px.svg" aria-label="List All" ng-click="expandList()"></md-icon>
@@ -86,6 +89,7 @@
 								<!-- </div> -->
 								<!-- <md-divider ></md-divider> -->
 							</md-list-item>
+						</div>
 						</div>
 					</md-list>
 

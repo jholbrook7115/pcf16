@@ -71,7 +71,7 @@ app.controller("MapCtrl", function($scope, $mdSidenav, $log, $mdSidenav, $http, 
             }
     };
 
-    
+
 	// $scope.geoLocationAvailable = navigator.geolocation;
 	// if($scope.geoLocationAvailable){
 	// 	$log.debug('Geolocation is available');
@@ -109,8 +109,8 @@ app.controller("MapCtrl", function($scope, $mdSidenav, $log, $mdSidenav, $http, 
 		} else {
 			url = PP_url.concat($scope.searchText);
 		}
-		//url = "https://localhost:8082/api/lots";
-		url = "https://pcf-2016.appspot.com/api/lots";
+		//url = "http://localhost:8082/api/locations";
+		url = "http://pcf-2016.appspot.com/api/locations";
 		$log.debug(url);
 		$http({
 			method: 'GET',
@@ -126,11 +126,20 @@ app.controller("MapCtrl", function($scope, $mdSidenav, $log, $mdSidenav, $http, 
 
 			for(var i = 0; i < response.data.length; i++){
 				var location = response.data[i];
-				var marker = new google.maps.Marker({
-					position: {lat: location.lat, lng: location.lng},
-					map: $scope.map
-					
-				});
+				if(location.parking_list){
+				for(var j = 0; j < location.parking_list.length; j++){
+					var parking_loc = location.parking_list[j];
+
+				
+				//var infowindow
+
+					var marker = new google.maps.Marker({
+						position: {lat: parking_loc.lat, lng: parking_loc.lng},
+						map: $scope.map
+						
+					});
+				}
+			}
 			}
 
 		}, function(response){
