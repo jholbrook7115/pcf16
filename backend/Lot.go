@@ -12,7 +12,8 @@ import (
 
 type Location struct {
 	LocationName string `json:"location_name"`
-	Parking      []Lot  `json:"parking_list"`
+	Key          string
+	Listing      []Lot `json:"parking_list"`
 }
 type Lot struct {
 	Title          string  `json:"title"`
