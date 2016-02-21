@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+
+<html ng-app="MapApp">
+
+<head>
+	
+	<title>Landing Lot</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <meta charset="utf-8"> 
+	<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+</head>
+
+<body ng-controller="MapCtrl">
+	<div id="container" layout-fill>
+		<md-content layout="column" layout-fill style="background-color: transparent">
+			<md-toolbar>
+				<div class="md-toolbar-tools">
+					<span><h2>Landing Lot</h2></span>
+					<span flex></span>
+					<div style="padding-top: 1%;">
+						<md-input-container>
+							<label>Search</label>
+							<input ng-model="searchText">
+						</md-input-container>
+					</div>
+					<md-button class="md-icon-button">
+						<md-icon md-svg-src="assets/icons/ic_menu_black_24px.svg" aria-label="Menu"></md-icon>
+					</md-button>
+				</div>
+			</md-toolbar>
+			
+				<md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="right-sidenav" flex>
+					
+				</md-sidenav>
+				<div id="map" flex></div>
+		</md-content>
+	</div>
+
+	<!-- Angular CDNs -->
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+  	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
+  	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
+  	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.min.js"></script>
+  	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
+  	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.0.3/angular-material.js"></script>
+  	<!-- Google Maps -->
+  	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBF-W6QcbO2nS4Zl8JIOiDVwMpH1xf-zIs&callback=initMap" async defer></script>
+
+  	<!-- Angular Module -->
+  	<script src="assets/js/map.js"></script>
+</body>
+
+</html>
