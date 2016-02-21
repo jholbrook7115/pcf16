@@ -12,5 +12,5 @@ func init() {
 	http.HandleFunc("/api/park_whiz", GetParkWhizLot)
 	http.HandleFunc("/api/park_panda", GetParkingPandaLots)
 	http.HandleFunc("/api/lots", GetLotsFromParkingPanda)
-
+	http.HandleFunc("/do/save/parkingpanda", SaveAllFromParkingPanda)
 }

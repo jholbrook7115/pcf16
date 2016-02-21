@@ -7,3 +7,5 @@ Task list (first iteration):
 - create cloud endpoints backend
 - putting it all together with frontend
 deploy
+
+$ goapp serve dispatch.yaml frontend/app.yaml backend/app.yaml
